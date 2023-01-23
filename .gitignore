@@ -1,4 +1,4 @@
 \__pycache__
 \nenv
-.env
-firebasesecret.json
+api/.env
+api/firebasesecret.json
