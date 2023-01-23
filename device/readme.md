@@ -1,4 +1,4 @@
-# introduction
+# Introduction
 This code is an ESP32 script that utilizes various libraries to collect data from multiple sensors and send it to a remote server through HTTP POST requests. The script uses a MAX30105 heart rate sensor to measure the heart rate, an Adafruit MPU6050 accelerometer/gyroscope sensor to detect falls, and WiFiManager to connect to a wifi network. The data is sent to a remote server using the HTTPClient library. The code is divided into several functions, such as setup(), loop(), setup1(), loop1(), make_post_request() and POSTREQ(). The setup() function is used to initialize the sensors and WiFi, and the loop() function is used to read sensor data and perform calculations. The setup1() and loop1() functions are used to handle the sending of data to the server, and make_post_request() and POSTREQ() are used to construct the HTTP request and send it to the server. The script is designed to detect falls, heart problem, and send notifications to a remote server.
 
 # Technologies
