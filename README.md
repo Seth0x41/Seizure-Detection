@@ -65,3 +65,7 @@ python app.py
 
  > **IMPORTANT NOTE**: This code is for educational purposes and there are many security issues with it.
 
+## References
+https://www.instructables.com/Emergency-Fall-Notifier-Cum-Panic-Button/
+https://www.mdpi.com/2673-4591/2/1/89
+
