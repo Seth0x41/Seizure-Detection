@@ -64,7 +64,7 @@ int make_post_request(String url, String request_body) {
   http.addHeader("Content-Type", "application/json");
 
 
-  delay(1000);
+  delay(100);
   int httpResponseCode = http.POST(request_body);
     if(httpResponseCode>0){
     String response = http.getString();  //Get the response to the request
@@ -101,6 +101,7 @@ void setup() {
     1,                      /* priority of the task */
     &SendRequests,            /* Task handle to keep track of created task */
     0); /* pin task to core */
+
 
 //  initialize heart rate sensor
   if (!particleSensor.begin(Wire, I2C_SPEED_FAST)) //Use default I2C port, 400kHz speed
@@ -152,6 +153,7 @@ void loop(){
 
     // income MAX30102 Data
 
+  
   long irValue = particleSensor.getIR();
 
   if (checkForBeat(irValue) == true)
@@ -169,6 +171,7 @@ void loop(){
 
       //Take average of readings
       beatAvg = 0;
+      
       for (byte x = 0 ; x < RATE_SIZE ; x++)
         beatAvg += rates[x];
       beatAvg /= RATE_SIZE;
@@ -252,24 +255,23 @@ void loop1(){
 
   // Send the BPM data to the server via the API
   if(res==true){   //Check WiFi connection status
-
     if (iswearing == false){
     beatAvg = 0;
     ax=0;
     ay=0;
     az=0;
   }
-    String url = "http://192.168.1.9:5000/api/send-data";
-    String data = "{\"BPM\": " + String(beatAvg) + ",\"iswearing\": " + String(iswearing) + "}";
+    Serial.println(beatAvg);
+    String url = "http://192.168.184.162:5000/api/send-data";
+    String data = "{\"BPM\": " + String(beatAvg) + "}";
     make_post_request(url,data);
  
     // Conditions for Detection
-    if (iswearing == true && (beatAvg > 100 || beatAvg < 60)){
+    if (iswearing == true && (beatAvg > 100 || beatAvg < 60)&& beatAvg != 0){
       counter += 1;
-      delay(500);
-      if (counter >= 2){
+      if (counter >= 3){
         triggerd = true;
-          String url = "http://192.168.1.9:5000/webhook/triggerd";
+          String url = "http://192.168.184.162:5000/webhook/triggerd";
           String data = "{\"message\": \"Heart Problem!\"}";
           make_post_request(url,data);
           counter = 0;
@@ -280,17 +282,18 @@ void loop1(){
       }
     }
         if(fall==true && iswearing == true && (triggerd == true) ){
-          String url = "http://192.168.1.9:5000/webhook/triggerd";
+          String url = "http://192.168.184.162:5000/webhook/triggerd";
           String data = "{\"message\": \"Seizure Detected!\"}";
+          Serial.println("Seizure DETECTED");
           make_post_request(url,data);
+
           triggerd = false;
-          delay (60000)
 
       }
 
  if (fall==true){ //in event of a fall detection
    Serial.println("FALL DETECTED");
-        String url = "http://192.168.1.9:5000/webhook/triggerd";
+        String url = "  /webhook/triggerd";
         String data = "{\"message\": \"FALL DETECTED!\"}";
           make_post_request(url,data);
    fall=false;
