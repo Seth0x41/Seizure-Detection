@@ -1,7 +1,7 @@
 # Seizure-Detection
 
 ## Introduction
-This project aims to build a monitoring system that tracks heart rate, detects falls and seizures. The system consists of three parts: a Flask web application, an Arduino program, and a Flutter app.
+This project aims to build a monitoring system that tracks heart rate, detects falls and seizures. The system consists of three parts: a Flask web application, an ESP32 program, and a Flutter app.
 The Flask web application provides a simple API for receiving and sending data to a remote server. The API allows for sending heart rate data and receiving it in JSON format.
 The ESP32 program uses the MAX30105 sensor to measure heart rate and Adafruit MPU6050 sensor for fall detection. It also uses the WiFiManager library to connect to a WiFi network and HTTPClient to send data to the server.
 The Flutter app retrieves heart rate data from the server, displays it in the app's UI, subscribes to a topic and receives push notifications using Firebase Cloud Messaging (FCM) service. It also uses the Flutter Local Notifications package to display notifications in the app.
