@@ -63,9 +63,11 @@ python app.py
 - Make sure to replace the firebase credentials and other configurations in the code.
 
 
- > **IMPORTANT NOTE**: This code is for educational purposes and there are many security issues with it.
 
 ## References
 https://www.instructables.com/Emergency-Fall-Notifier-Cum-Panic-Button/ <br>
 https://www.mdpi.com/2673-4591/2/1/89
+
+
+> **IMPORTANT NOTE**: This code is for educational purposes and there are many security issues with it.
 
